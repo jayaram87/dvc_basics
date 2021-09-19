@@ -12,4 +12,9 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/jayaram87/dvc_basics.git
 git push -u origin main
+tox
+tox - r # for rebuilding
+pytest -v
+pip install -e . # for local packages
+python setup.py sdist bdist_wheel
 ```
