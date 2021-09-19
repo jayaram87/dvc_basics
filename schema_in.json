@@ -1,0 +1,6 @@
+{
+  "TV":{"min":0.7,"max":296.4},
+  "radio":{"min":0.0,"max":49.6},
+  "newspaper":{"min":0.3,"max":114.0},
+  "sales":{"min":1.6,"max":27.0}
+}
