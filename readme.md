@@ -2,6 +2,8 @@
 pip install sklearn
 pip install dvc
 pip install dvc[gdrive]
+pip install tox
+pip install pytest
 git init
 dvc init
 dvc add data_given/sample.csv
