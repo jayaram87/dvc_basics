@@ -6,6 +6,7 @@ from sklearn.linear_model import ElasticNet
 from get_data import read_params
 import argparse
 import pickle
+import json
 
 def train_eval(config_path):
     config = read_params(config_path)
@@ -14,7 +15,7 @@ def train_eval(config_path):
     random_state = config['base']['random_state']
     model_dir = config['model_dir']
     alpha = config['estimators']['ElasticNet']['params']['alpha']
-    l1ratio = config['estimators']['ElasticNet']['params']['l1_ratio']
+    l1_ratio = config['estimators']['ElasticNet']['params']['l1_ratio']
     target = config['base']['target_col']
 
     train = pd.read_csv(train_path, sep=',')
@@ -23,14 +24,27 @@ def train_eval(config_path):
     train_x, train_y = train.iloc[:, 0:3], train.loc[:, target:]
     test_x, test_y = test.iloc[:, 0:3], test.loc[:, target:]
 
-    lr = ElasticNet(alpha=alpha, l1_ratio=l1ratio, random_state=random_state)
+    lr = ElasticNet(alpha=alpha, l1_ratio=l1_ratio, random_state=random_state)
     lr.fit(train_x, train_y)
 
     preds = lr.predict(test_x)
 
     rmse, mse, r2 = np.sqrt(mean_squared_error(test_y, preds)), mean_absolute_error(test_y, preds), r2_score(test_y, preds)
 
-    print(rmse, mse, r2)
+    with open(config['reports']['scores'], 'w') as f:
+        scores = {
+            "rsme": rmse,
+            "mae": mse,
+            "r2": r2
+        }
+        json.dump(scores, f, indent=4)
+
+    with open(config['reports']['params'], 'w') as f:
+        params = {
+            "alpha": alpha,
+            "l1_ratio": l1_ratio,
+        }
+        json.dump(params, f, indent=4)
 
     with open(os.path.join(model_dir, 'lr.sav'), 'wb+') as f:
         pickle.dump(lr, f)
