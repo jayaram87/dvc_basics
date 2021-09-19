@@ -7,3 +7,12 @@ stages:
       - data_given/sample.csv
     outs:
       - data/raw/sample.csv
+
+  split_data:
+    cmd: python src/split_data.py --config=params.yaml
+    deps:
+      - src/get_data.py
+      - data/raw/sample.csv
+    outs:
+      - data/processed/train_sample.csv
+      - data/processed/test_sample.csv
