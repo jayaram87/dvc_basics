@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block head %}
+
+<title>Index Page</title>
+{% endblock %}
+
+{% block body %}
+<div class="content">
+    <h1 style="text-align: center">Predict Sales revenue</h1>
+
+    <div class="form">
+        <form action="/predict" method="POST">
+            <label for="TV">TV spend</label>
+            <input type="number" name="TV" id="TV" placeholder="TV $">
+            <br>
+            <br>
+            <label for="radio">Radio spend</label>
+            <input type="number" name="radio" id="radio" placeholder="radio $">
+            <br>
+            <br>
+            <label for="newspaper">Newspaper spend</label>
+            <input type="number" name="newspaper" id="newspaper" placeholder="newspaper $">
+            <br>
+            <br>
+            <input type="submit" value="Predict">
+        </form>
+    </div>
+</div>
+{% endblock %}
