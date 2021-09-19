@@ -1,7 +1,7 @@
 base:
-  project: body_movement_project
+  project: sales_lr_project
   random_state: 42
-  target_col: label
+  target_col: sales
 
 data_source:
   s3_source: data_given/sample.csv
