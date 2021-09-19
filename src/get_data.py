@@ -12,7 +12,7 @@ def get_data(config_path):
     config = read_parmas(config_path)
     #print(config)
     data = config['data_source']['s3_source']
-    df = pd.read_csv(data, sep=',', encoding='utf-8').iloc[:,1:]
+    df = pd.read_csv(data, sep=',', encoding='utf-8').iloc[:, 1:]
     print(df.head())
     return df
 
